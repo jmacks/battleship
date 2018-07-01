@@ -106,11 +106,11 @@ class Board {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
+    this.usedSpaces = [];
   }
 
   placeShip(length) {
 
-      let usedSpaces = [];
       /*
         well always lay ship from top down and from left to right
         subtracting the length from the starting vertices should ensure
@@ -135,11 +135,11 @@ class Board {
               shipUsedSpaces.push(squareName);
           }
           for(let i in shipUsedSpaces){
-              if(usedSpaces.indexOf(i) > -1){
+              if(this.usedSpaces.indexOf(i) > -1){
                   this.placeShip(length);
               } else {
                   shipUsedSpaces.forEach((e) => {
-                      usedSpaces.push(e);
+                      this.usedSpaces.push(e);
                       let splitName = e.split('-');
                       let rowNum = splitName[1] - 1;
                       let columnNum = splitName[3] -1;
@@ -159,11 +159,11 @@ class Board {
               }
 
               for(let i in shipUsedSpaces){
-                  if(usedSpaces.indexOf(i) > -1){
+                  if(this.usedSpaces.indexOf(i) > -1){
                       this.placeShip(length);
                   } else {
                       shipUsedSpaces.forEach((e) => {
-                          usedSpaces.push(e);
+                          this.usedSpaces.push(e);
                           let splitName = e.split('-');
                           let rowNum = splitName[1] - 1;
                           let columnNum = splitName[3] -1;
@@ -173,7 +173,7 @@ class Board {
                   }
               }
           }
-          console.log('used spaces', usedSpaces);
+          console.log('used spaces', this.usedSpaces);
       }
 
   renderBoard() {
